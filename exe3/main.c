@@ -29,10 +29,16 @@ void process_task(void *p) {
     while (true) {
         if (xQueueReceive(xQueueData, &data, 100)) {
             // implementar filtro aqui!
-
-
-
-
+            float sum = 0;
+            int count = 0;
+            for (int i = 0; i < 5; i++) {
+                if (xQueueReceive(xQueueData, &data, 100)) {
+                    sum += data;
+                    count++;
+                }
+            }
+            printf("Data: %f\n", sum / count);
+        } else {
             // deixar esse delay!
             vTaskDelay(pdMS_TO_TICKS(50));
         }
